@@ -1,4 +1,4 @@
-package github.devatomicfull.agenda_contatos;
+package github.devatomicfull.agenda_contatos.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +9,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import github.devatomicfull.agenda_contatos.databinding.ActivityMainBinding;
+import github.devatomicfull.agenda_contatos.R;
+import github.devatomicfull.agenda_contatos.databinding.ActivityListBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
     // Declara o objeto de binding gerado automaticamente a partir do layout XML (activity_main.xml)
     // O nome da classe é formado pelo nome do arquivo XML em PascalCase + "Binding".
     // Exemplo: activity_main.xml → ActivityMainBinding
-    private ActivityMainBinding binding;
+    private ActivityListBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         // Inicializa (infla) o layout XML usando o View Binding.
         // Essa linha substitui o uso manual de setContentView(R.layout.activity_main)
         // e cria uma instância de binding que fornece acesso direto a todas as Views do layout.
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityListBinding.inflate(getLayoutInflater());
 
         // Obtém a View raiz (root) do layout inflado.
         // É essa View que será passada para o setContentView().
