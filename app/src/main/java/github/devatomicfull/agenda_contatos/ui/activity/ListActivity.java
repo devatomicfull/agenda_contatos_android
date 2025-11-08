@@ -1,7 +1,11 @@
 package github.devatomicfull.agenda_contatos.ui.activity;
 
 import android.os.Bundle;
+
 import android.view.View;
+
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 import github.devatomicfull.agenda_contatos.R;
+import github.devatomicfull.agenda_contatos.data.model.Contato;
 import github.devatomicfull.agenda_contatos.databinding.ActivityListBinding;
+import github.devatomicfull.agenda_contatos.ui.adapter.List_Adapter;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -47,5 +55,27 @@ public class ListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ListView listContatosView = binding.listContatosView;
+
+        // Cria lista de contatos de exemplo
+        ArrayList<Contato> contatos = getContatos(); // ou carregar do banco de dados
+
+        // Cria e define o adapter
+        List_Adapter adapter = new List_Adapter(contatos, this);
+        listContatosView.setAdapter(adapter);
+
+        binding.floatingAdd.setOnClickListener(v -> {
+            Toast.makeText(getParent(), "Teste do Botao Flotoante", Toast.LENGTH_SHORT).show();
+        });
     }
+
+    private ArrayList<Contato> getContatos() {
+        ArrayList<Contato> lista = new ArrayList<>();
+        lista.add(new Contato("Ana Silva", "ana@email.com" ));
+        lista.add(new Contato("Zeca Souza", "carlos@email.com" ));
+        lista.add(new Contato("Maria Oliveira", "maria@email.com" ));
+        return lista;
+    }
+
 }
