@@ -66,14 +66,14 @@ public class ListActivity extends AppCompatActivity {
         listContatosView.setAdapter(adapter);
 
         binding.floatingAdd.setOnClickListener(v -> {
-            Toast.makeText(getParent(), "Teste do Botao Flotoante", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Teste do Botao Flotoante", Toast.LENGTH_SHORT).show();
         });
     }
 
     private ArrayList<Contato> getContatos() {
         ArrayList<Contato> lista = new ArrayList<>();
         lista.add(new Contato("Ana Silva", "ana@email.com" ));
-        lista.add(new Contato("Zeca Souza", "carlos@email.com" ));
+        lista.add(new Contato("Zeca Souza", "zeca@email.com" ));
         lista.add(new Contato("Maria Oliveira", "maria@email.com" ));
         return lista;
     }
