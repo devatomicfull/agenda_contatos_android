@@ -1,9 +1,11 @@
 package github.devatomicfull.agenda_contatos.data.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 import androidx.annotation.Nullable;
@@ -65,4 +67,20 @@ public class ContatoDao extends SQLiteOpenHelper {
         return contatoArrayList;
     }
 
+    public void insere(Contato contato) {
+        ContentValues values = new ContentValues();
+        values.put("nome", contato.getNome());
+        values.put("email", contato.getEmail());
+        values.put("telefone", contato.getTelefone());
+        values.put("imagem", contato.getImagem());
+        values.put("excluido", contato.getExcluido());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        long id = db.insert("contato", null, values);
+        contato.setId((int)id);
+
+        Log.d("t", id+"");
+        db.close();
+    }
 }

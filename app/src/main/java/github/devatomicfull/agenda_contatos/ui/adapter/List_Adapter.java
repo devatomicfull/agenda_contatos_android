@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import github.devatomicfull.agenda_contatos.data.model.Contato;
 import github.devatomicfull.agenda_contatos.databinding.ItemListContatBinding;
@@ -19,6 +20,11 @@ public class List_Adapter extends BaseAdapter {
     public List_Adapter(ArrayList<Contato> contatoArrayList, Context context) {
         this.contatoArrayList = contatoArrayList;
         this.context = context;
+    }
+
+    public void atualizarListaAdapter(List<Contato> contatoList){
+        this.contatoArrayList = new ArrayList<>(contatoList);
+        notifyDataSetChanged();
     }
 
     /**

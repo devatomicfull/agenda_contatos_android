@@ -1,5 +1,6 @@
 package github.devatomicfull.agenda_contatos.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 import github.devatomicfull.agenda_contatos.R;
+import github.devatomicfull.agenda_contatos.data.dao.ContatoDao;
 import github.devatomicfull.agenda_contatos.data.model.Contato;
 import github.devatomicfull.agenda_contatos.databinding.ActivityListBinding;
 import github.devatomicfull.agenda_contatos.ui.adapter.List_Adapter;
@@ -26,6 +28,7 @@ public class ListActivity extends AppCompatActivity {
     // O nome da classe é formado pelo nome do arquivo XML em PascalCase + "Binding".
     // Exemplo: activity_main.xml → ActivityMainBinding
     private ActivityListBinding binding;
+    private List_Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,20 +65,27 @@ public class ListActivity extends AppCompatActivity {
         ArrayList<Contato> contatos = getContatos(); // ou carregar do banco de dados
 
         // Cria e define o adapter
-        List_Adapter adapter = new List_Adapter(contatos, this);
+        adapter = new List_Adapter(contatos, this);
         listContatosView.setAdapter(adapter);
 
         binding.floatingAdd.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), "Teste do Botao Flotoante", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ListActivity.this, CadastraActivity.class);
+            startActivity(intent);
+
         });
     }
 
     private ArrayList<Contato> getContatos() {
         ArrayList<Contato> lista = new ArrayList<>();
-        lista.add(new Contato("Ana Silva", "ana@email.com" ));
-        lista.add(new Contato("Zeca Souza", "zeca@email.com" ));
-        lista.add(new Contato("Maria Oliveira", "maria@email.com" ));
+        ContatoDao cd = new ContatoDao(this);
+        lista = cd.contatoBuscaArrayList();
         return lista;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.atualizarListaAdapter(getContatos());
+    }
 }
